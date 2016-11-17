@@ -25,7 +25,7 @@
 
 &gpmc {
 	ethernet@gpmc {
-		compatible = "smsc,lan9221","smsc,lan9115";
+		compatible = "smsc,lan9220","smsc,lan9115";
 		bank-width = <2>;
 
 		gpmc,mux-add-data;

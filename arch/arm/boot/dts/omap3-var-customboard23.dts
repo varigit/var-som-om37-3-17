@@ -1,0 +1,21 @@
+/*
+ * Copyright (C) 2012 Florian Vaussard, EPFL Mobots group
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+ */
+
+/*
+ * Variscite VAR-CustomBoard 2.3 manufactured by Variscite LTD.
+ */
+
+/dts-v1/;
+
+#include "omap3-var-customboard23.dtsi"
+
+/ {
+	model = "VAR-SOM-OM3x on Var-CustomBoard 2.3";
+	compatible = "ti,omap36xx", "ti,omap3";
+};
+

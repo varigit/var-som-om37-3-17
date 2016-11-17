@@ -1,0 +1,52 @@
+/*
+ * Support for USB_HOST on VAR-SOM-OM37
+*/
+
+/ {
+	usb_host_power: usb_host_power_reg {
+		compatible = "regulator-fixed";
+		regulator-name = "usb_vbus";
+		regulator-min-microvolt = <5000000>;
+		regulator-max-microvolt = <5000000>;
+		regulator-always-on;
+	};
+
+	hsusb2_phy: hsusb2_phy {
+		compatible = "usb-nop-xceiv";
+		reset-gpios = <&gpio1 24>;
+		vcc-supply = <&usb_host_power>;
+	};
+};
+
+ 
+&usbhsehci {
+	phys = <0 &hsusb2_phy>;
+};
+
+&usbhshost {
+	port2-mode = "ehci-phy";
+};
+
+&omap3_pmx_core2 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&hsusb1_pins>;
+	
+	hsusb1_pins: pinmux_hsusb1_pins {
+		pinctrl-single,pins = <
+			OMAP3630_CORE2_IOPAD(0x25F0, PIN_OUTPUT | MUX_MODE4)		/* etk_d10.gpio_24     */
+			OMAP3630_CORE2_IOPAD(0x25DA, PIN_OUTPUT | MUX_MODE3)		/* etk_ctl.hsusb1_clk  */
+			OMAP3630_CORE2_IOPAD(0x25DC, PIN_INPUT_PULLDOWN | MUX_MODE3)	/* etk_d0.hsusb1_data0 */
+			OMAP3630_CORE2_IOPAD(0x25DE, PIN_INPUT_PULLDOWN | MUX_MODE3)	/* etk_d1.hsusb1_data1 */
+			OMAP3630_CORE2_IOPAD(0x25E0, PIN_INPUT_PULLDOWN | MUX_MODE3)	/* etk_d2.hsusb1_data2 */
+			OMAP3630_CORE2_IOPAD(0x25EA, PIN_INPUT_PULLDOWN | MUX_MODE3)	/* etk_d7.hsusb1_data3 */
+			OMAP3630_CORE2_IOPAD(0x25E4, PIN_INPUT_PULLDOWN | MUX_MODE3)	/* etk_d4.hsusb1_data4 */
+			OMAP3630_CORE2_IOPAD(0x25E6, PIN_INPUT_PULLDOWN | MUX_MODE3)	/* etk_d5.hsusb1_data5 */
+			OMAP3630_CORE2_IOPAD(0x25E8, PIN_INPUT_PULLDOWN | MUX_MODE3)	/* etk_d6.hsusb1_data6 */
+			OMAP3630_CORE2_IOPAD(0x25E2, PIN_INPUT_PULLDOWN | MUX_MODE3)	/* etk_d3.hsusb1_data7 */
+			OMAP3630_CORE2_IOPAD(0x25EC, PIN_INPUT_PULLDOWN | MUX_MODE3)	/* etk_d8.hsusb1_dir   */
+			OMAP3630_CORE2_IOPAD(0x25EE, PIN_INPUT_PULLDOWN | MUX_MODE3)	/* etk_d9.hsusb1_nxt   */
+			OMAP3630_CORE2_IOPAD(0x25D8, PIN_OUTPUT | MUX_MODE3)		/* etk_clk.hsusb1_stp  */
+		>;
+	};
+};	
+

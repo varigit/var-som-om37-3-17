@@ -1,0 +1,9 @@
+if TARGET_OMAP3_VAR_SOM
+
+config SYS_BOARD
+	default "var_som"
+
+config SYS_CONFIG_NAME
+	default "omap3_var_som"
+
+endif

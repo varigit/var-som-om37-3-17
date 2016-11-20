@@ -1,0 +1,6 @@
+VAR-SOM-OM37 BOARD
+M:	Leonid Segal <leonid.s@variscite.com>
+S:	Maintained
+F:	board/var-som/
+F:	include/configs/omap3_var_som.h
+F:	configs/omap3_var_som_defconfig

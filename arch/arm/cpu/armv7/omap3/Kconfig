@@ -48,6 +48,13 @@ config TARGET_OMAP3_EVM_QUICK_NAND
 	bool "TI OMAP3 EVM Quick NAND"
 	select SUPPORT_SPL
 
+config TARGET_OMAP3_VAR_SOM
+	bool "OMAP35xx Variscite VAR-SOM-OM37"
+	select SUPPORT_SPL
+	select DM
+	select DM_SERIAL
+	select DM_GPIO
+
 config TARGET_OMAP3_IGEP00X0
 	bool "IGEP"
 	select SUPPORT_SPL
@@ -129,6 +136,7 @@ source "board/timll/devkit8000/Kconfig"
 source "board/ti/evm/Kconfig"
 source "board/isee/igep00x0/Kconfig"
 source "board/overo/Kconfig"
+source "board/var_som/Kconfig"
 source "board/logicpd/zoom1/Kconfig"
 source "board/ti/am3517crane/Kconfig"
 source "board/pandora/Kconfig"

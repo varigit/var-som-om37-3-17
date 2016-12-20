@@ -18,15 +18,15 @@
 		};
 
 		panel-timing {
-			clock-frequency = <30000000>;
-			hactive = <800>;
-			vactive = <480>;
-			hfront-porch = <40>;
-			hback-porch = <40>;
-			hsync-len = <48>;
-			vback-porch = <29>;
-			vfront-porch = <13>;
-			vsync-len = <3>;
+			clock-frequency = <8000000>;
+			hactive = <320>;
+			vactive = <240>;
+			hfront-porch = <18>;
+			hback-porch = <38>;
+			hsync-len = <30>;
+			vback-porch = <11>;
+			vfront-porch = <10>;
+			vsync-len = <2>;
 			hsync-active = <0>;
 			vsync-active = <0>;
 			de-active = <1>;
@@ -38,7 +38,7 @@
 		pinctrl-names = "default";
 		pinctrl-0 = <&backlight_pins>;
                 compatible = "gpio-backlight";
-                gpios = <&gpio1 28 GPIO_ACTIVE_HIGH>;
+                gpios = <&gpio2 23 GPIO_ACTIVE_LOW>;
                 default-on;
 		status = "okay";
         };
@@ -99,13 +99,12 @@
 			OMAP3_CORE1_IOPAD(0x2108, PIN_OUTPUT | MUX_MODE0)	/* dss_data22.dss_data22 */
 			OMAP3_CORE1_IOPAD(0x210a, PIN_OUTPUT | MUX_MODE0)	/* dss_data23.dss_data23 */
 		>;
-	};	
-};
-
-&omap3_pmx_core2 {
+	};
+		
 	backlight_pins: pinmux_backlight_pins {
 		pinctrl-single,pins = <
-			OMAP3630_CORE2_IOPAD(0x25f8, PIN_INPUT_PULLUP | MUX_MODE4)	/* etk_d14.gpio_28 */
+			OMAP3_CORE1_IOPAD(0x20B6, PIN_OUTPUT | MUX_MODE4)	/* gpmc_ncs4.gpio_55 */
 		>;
 	};
 };
+ 

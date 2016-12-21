@@ -26,7 +26,7 @@ const omap3_sysinfo sysinfo = {
 #define MUX_VAR_SOM() \
   /*GPMC*/\
 	MUX_VAL(CP(GPMC_NCS1),		(IDIS | PTU | EN  | M0)) /*GPMC_nCS1*/\
-	MUX_VAL(CP(GPMC_NCS4),		(IDIS | PTU | EN  | M0)) /*GPMC_nCS4*/\
+	MUX_VAL(CP(GPMC_NCS4),		(IDIS | PTD | EN  | M4)) /*GPIO_55*/\
 	MUX_VAL(CP(GPMC_NCS5),		(IDIS | PTU | EN  | M0)) /*GPMC_nCS5*/\
 	MUX_VAL(CP(GPMC_NCS6),		(IEN  | PTD | DIS | M0)) /*GPMC_nCS6*/\
 	MUX_VAL(CP(GPMC_WAIT1),		(IEN  | PTU | EN  | M4)) /*GPIO_63*/\
@@ -53,6 +53,40 @@ const omap3_sysinfo sysinfo = {
 	MUX_VAL(CP(ETK_D7_ES2),		(IEN  | PTU | EN  | M4)) /*GPIO_21*/\
 	MUX_VAL(CP(ETK_D8_ES2),		(IEN  | PTU | EN  | M4)) /*GPIO_22*/\
 	MUX_VAL(CP(ETK_D9_ES2),		(IEN  | PTU | EN  | M4)) /*GPIO_23*/\
+ /* DSS */\
+        MUX_VAL(CP(DSS_PCLK),           (IDIS | PTD | DIS | M0)) \
+        MUX_VAL(CP(DSS_HSYNC),          (IDIS | PTD | DIS | M0)) \
+        MUX_VAL(CP(DSS_VSYNC),          (IDIS | PTD | DIS | M0)) \
+        MUX_VAL(CP(DSS_ACBIAS),         (IDIS | PTD | DIS | M0)) \
+        MUX_VAL(CP(DSS_DATA0),          (IDIS | PTD | DIS | M0)) \
+        MUX_VAL(CP(DSS_DATA1),          (IDIS | PTD | DIS | M0)) \
+        MUX_VAL(CP(DSS_DATA2),          (IDIS | PTD | DIS | M0)) \
+        MUX_VAL(CP(DSS_DATA3),          (IDIS | PTD | DIS | M0)) \
+        MUX_VAL(CP(DSS_DATA4),          (IDIS | PTD | DIS | M0)) \
+        MUX_VAL(CP(DSS_DATA5),          (IDIS | PTD | DIS | M0)) \
+        MUX_VAL(CP(DSS_DATA6),          (IDIS | PTD | DIS | M0)) \
+        MUX_VAL(CP(DSS_DATA7),          (IDIS | PTD | DIS | M0)) \
+        MUX_VAL(CP(DSS_DATA8),          (IDIS | PTD | DIS | M0)) \
+        MUX_VAL(CP(DSS_DATA9),          (IDIS | PTD | DIS | M0)) \
+        MUX_VAL(CP(DSS_DATA10),         (IDIS | PTD | DIS | M0)) \
+        MUX_VAL(CP(DSS_DATA11),         (IDIS | PTD | DIS | M0)) \
+        MUX_VAL(CP(DSS_DATA12),         (IDIS | PTD | DIS | M0)) \
+        MUX_VAL(CP(DSS_DATA13),         (IDIS | PTD | DIS | M0)) \
+        MUX_VAL(CP(DSS_DATA14),         (IDIS | PTD | DIS | M0)) \
+        MUX_VAL(CP(DSS_DATA15),         (IDIS | PTD | DIS | M0)) \
+        MUX_VAL(CP(DSS_DATA16),         (IDIS | PTD | DIS | M0)) \
+        MUX_VAL(CP(DSS_DATA17),         (IDIS | PTD | DIS | M0)) \
+        MUX_VAL(CP(DSS_DATA18),         (IDIS | PTD | DIS | M0)) \
+        MUX_VAL(CP(DSS_DATA19),         (IDIS | PTD | DIS | M0)) \
+        MUX_VAL(CP(DSS_DATA20),         (IDIS | PTD | DIS | M0)) \
+        MUX_VAL(CP(DSS_DATA21),         (IDIS | PTD | DIS | M0)) \
+        MUX_VAL(CP(DSS_DATA22),         (IDIS | PTD | DIS | M0)) \
+        MUX_VAL(CP(DSS_DATA23),         (IDIS | PTD | DIS | M0)) \
+ /* McSPI */\
+        MUX_VAL(CP(MCSPI2_CLK),         (IEN  | PTD | DIS | M0)) \
+        MUX_VAL(CP(MCSPI2_SIMO),        (IEN  | PTD | DIS | M0)) \
+        MUX_VAL(CP(MCSPI2_SOMI),        (IEN  | PTD | DIS | M0)) \
+        MUX_VAL(CP(MCSPI2_CS0),         (IEN  | PTD | EN  | M0)) \
 
 #define MUX_VAR_SOM_SDIO2_DIRECT() \
 	MUX_VAL(CP(MMC2_CLK),		(IEN  | PTU | EN  | M0)) /*MMC2_CLK*/\

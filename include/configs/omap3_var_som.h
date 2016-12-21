@@ -41,6 +41,11 @@
 #define CONFIG_OMAP_EHCI_PHY1_RESET_GPIO	183
 #define CONFIG_SYS_USB_EHCI_MAX_ROOT_PORTS	3
 
+
+#define CONFIG_SPI
+#define CONFIG_CMD_SPI
+#define CONFIG_VIDEO_OMAP3	/* DSS Support			*/
+
 /* Initialize GPIOs by default */
 #define CONFIG_OMAP3_GPIO_2	/* GPIO32..63 is in GPIO Bank 2 */
 #define CONFIG_OMAP3_GPIO_3	/* GPIO64..95 is in GPIO Bank 3 */
@@ -98,6 +103,7 @@
 		"mpurate=${mpurate} " \
 		"vram=${vram} " \
 		"omapdss.def_disp=display0 " \
+		"omapfb.rotate=2 " \
 		"root=${mmcroot} " \
 		"rootfstype=${mmcrootfstype}\0" \
 	"nandargs=setenv bootargs console=${console} " \
@@ -105,6 +111,7 @@
 		"mpurate=${mpurate} " \
 		"vram=${vram} " \
 		"omapdss.def_disp=display0 " \
+		"omapfb.rotate=2 " \
 		"root=${nandroot} " \
 		"rootfstype=${nandrootfstype}\0" \
 	"loadbootscript=load mmc ${mmcdev} ${loadaddr} boot.scr\0" \

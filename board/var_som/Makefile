@@ -6,7 +6,7 @@
 #
 
 ifdef CONFIG_SPL_BUILD
-obj-y	:= spl.o common.o
+obj-y	:= spl.o common.o bootsplash.o
 else
-obj-y	:= var_som.o common.o
+obj-y	:= var_som.o common.o bootsplash.o
 endif

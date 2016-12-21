@@ -25,7 +25,11 @@
 #include <asm/arch/sys_proto.h>
 #include <asm/gpio.h>
 #include <asm/mach-types.h>
+#include <asm/arch/dss.h>
+#include <spi.h>
 #include "var_som.h"
+#include "bootsplash.h"
+
 
 #ifdef CONFIG_USB_EHCI
 #include <usb.h>
@@ -79,10 +83,64 @@ int get_sdio2_config(void)
 	return sdio_direct;
 }
 
+static int lcd_spi_init(void)
+{
+	int i;
+	int ret = 0;
+	struct spi_slave *slave;
+	uchar dout[2];
+	uchar din[2];
+	int init_messages[21]={	0x0207,0x0600,0x0A03,0x0ECC,
+				0x1246,0x160D,0x1A00,0x1E00,
+				0x2208,0x2640,0x2A88,0x2E88,
+				0x3220,0x3620,0x3A6B,0x3E24,
+				0x4204,0x4624,0x4A24,0x7A00,
+				0x8200};
+
+
+	slave = spi_setup_slave(1, 0, 1000000, 0);
+	if (!slave) {
+		printf("Invalid device %d:%d\n", 2, 0);
+		return -EINVAL;
+	}
+
+	ret = spi_claim_bus(slave);
+	if (ret)
+		goto done;
+	
+	for(i=0;i<21;i++)
+	{
+		dout[0]=(uchar)(init_messages[i]>>8);
+		dout[1]=(uchar)(init_messages[i]&0xff);
+		ret = spi_xfer(slave, 16, dout, din, SPI_XFER_BEGIN | SPI_XFER_END);
+		if (ret) {
+			printf("Error %d during SPI transaction\n", ret);
+		}
+	}
+done:
+	spi_release_bus(slave);
+	return ret;
+}
+
 /*
  * Routine: misc_init_r
  * Description: Configure board specific parts
  */
+#define BACKLIGHT	55
+static struct panel_config lcd_cfg = {
+	.timing_h       = PANEL_TIMING_H(38, 18, 30),
+	.timing_v       = PANEL_TIMING_V(11, 10, 2),
+	.pol_freq       = DSS_IHS | DSS_IVS | DSS_IPC,
+	.divisor        = 12 | (1 << 16),
+	.panel_type     = ACTIVE_DISPLAY,
+	.data_lines     = LCD_INTERFACE_24_BIT,
+	.load_mode      = 0x02, /* Frame Mode */
+	.panel_color    = 0,
+	.gfx_format     = GFXFORMAT_RGB16,
+	.frame_buffer	= (void*)gimp_image,
+	.lcd_size       = PANEL_LCD_SIZE(320, 240),
+};
+
 int misc_init_r(void)
 {
 	twl4030_power_init();
@@ -90,6 +148,14 @@ int misc_init_r(void)
 	puts("Direct connection on mmc2\n");
 	MUX_VAR_SOM_SDIO2_DIRECT();
 	MUX_VAR_SOM();
+
+	lcd_spi_init();
+
+        omap3_dss_panel_config(&lcd_cfg);
+        omap3_dss_enable();
+
+        gpio_request(BACKLIGHT, "Backlight");
+        gpio_direction_output(BACKLIGHT, 0);
 
 	return 0;
 }
